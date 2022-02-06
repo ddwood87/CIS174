@@ -1,0 +1,35 @@
+﻿@model List<Contact>
+@{
+    ViewData["Title"] = "Contact List";
+}
+
+<h2>Contacts</h2>
+<a asp-controller="Contact" asp-action="Add">Add Contact</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Note</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var contact in Model)
+            {
+                <tr>
+                    <td>@contact.Name</td>
+                    <td>@contact.Phone</td>
+                    <td>@contact.Email</td>
+                    <td>@contact.Note</td>
+                    <td>
+                        <a asp-controller="Contact" asp-action="Edit"
+                           asp-route-id="@contact.Id">Edit</a>
+                        <a asp-controller="Contact" asp-action="Delete"
+                           asp-route-id="@contact.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>
