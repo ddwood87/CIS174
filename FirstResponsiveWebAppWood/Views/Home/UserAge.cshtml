@@ -1,0 +1,18 @@
+﻿@model UserAge
+@{
+    ViewBag.Title = "User Age";
+}
+<h1>User Age</h1>
+<div class="table-responsive-sm">
+    <table class="table">
+        <tr>
+            <td>Name: </td>
+            <td asp-for="Name">@ViewBag.Name</td>
+        </tr>
+        <tr>
+            <td>Age: </td>
+            <td asp-for="Age">@ViewBag.Age</td>
+        </tr>
+    </table>
+    <a asp-action="Index" method="post" type="submit">Back</a>
+</div>

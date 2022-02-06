@@ -1,0 +1,22 @@
+﻿@model FirstResponsiveWebAppWood.Models.UserAge
+
+@{
+    ViewData["Title"] = "User Age";
+}
+
+<h1>User Age</h1>
+<form asp-action="UserAge" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label class="control-label" asp-for="Name">Name</label>
+        <input asp-for="Name" class="form-control" value="@ViewBag.Name"/>
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="BirthYear">Birth Year</label>
+        <input asp-for="BirthYear" class="form-control" value="@ViewBag.BirthYear"/>
+    </div>
+    <div class="form-group">
+        <button class="btn-primary" type="submit">Find Age</button>
+        <a asp-action="Index">Clear</a>
+    </div>
+</form>
