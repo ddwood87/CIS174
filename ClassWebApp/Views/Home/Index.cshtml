@@ -1,0 +1,30 @@
+﻿@model Models.ViewModel;
+@{}
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>CIS 174 Web App</p>
+    <p>CIS 174 Students</p>
+    @if (Model != null)
+    {
+        <table>
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Grade</th>
+                <th><a asp-controller="Home" asp-action="Add">Add</a></th>
+            </tr>
+            @foreach (Models.Student s in Model.Students)
+            {
+        <tr>
+            <td>@s.LastName,</td>
+            <td>@s.FirstName</td>
+            <td>@s.Grade</td>
+            <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@s.Id">Edit</a></td>
+            <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@s.Id">Delete</a></td>
+            <td><a asp-controller="Assignment" asp-action="Index" asp-route-id="@s.Id">Assignments</a></td>
+        </tr>
+            }
+        </table>
+    }
+
+</div>

@@ -184,3 +184,6 @@ C:\Users\dwood\Documents\Dom DMACC\Dom DMACC S2022\CIS174\Module1\FirstResponsiv
 C:\Users\dwood\Documents\Dom DMACC\Dom DMACC S2022\CIS174\Module1\FirstResponsiveWebAppTest\obj\Debug\net5.0\ref\FirstResponsiveWebAppTest.dll
 C:\Users\dwood\Documents\Dom DMACC\Dom DMACC S2022\CIS174\Module1\FirstResponsiveWebAppTest\obj\Debug\net5.0\FirstResponsiveWebAppTest.pdb
 C:\Users\dwood\Documents\Dom DMACC\Dom DMACC S2022\CIS174\Module1\FirstResponsiveWebAppTest\obj\Debug\net5.0\FirstResponsiveWebAppTest.genruntimeconfig.cache
+C:\Users\dwood\Documents\Dom DMACC\Dom DMACC S2022\CIS174\cis174repo\FirstResponsiveWebAppTest\obj\Debug\net5.0\FirstResponsiveWebAppTest.dll
+C:\Users\dwood\Documents\Dom DMACC\Dom DMACC S2022\CIS174\cis174repo\FirstResponsiveWebAppTest\obj\Debug\net5.0\ref\FirstResponsiveWebAppTest.dll
+C:\Users\dwood\Documents\Dom DMACC\Dom DMACC S2022\CIS174\cis174repo\FirstResponsiveWebAppTest\obj\Debug\net5.0\FirstResponsiveWebAppTest.pdb

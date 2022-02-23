@@ -1,0 +1,11 @@
+﻿@model Models.ViewModel;
+@{
+}
+<h1>@ViewData["Title"]</h1>
+<p>Link to assignment</p>
+<ul>
+    @foreach(Models.Assignment a in Model.StudentAssignments) 
+    { 
+        <li><a href="@a.AppLink">@a.Name App</a><a href="@a.GitLink">"Git"</a></li>
+    }
+</ul>
