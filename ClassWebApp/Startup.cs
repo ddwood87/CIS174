@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ClassWebApp.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClassWebApp
 {
@@ -25,7 +27,8 @@ namespace ClassWebApp
         {
             services.AddRazorPages();
             services.AddControllersWithViews();
-
+            services.AddDbContext<ClassContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Database")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +44,6 @@ namespace ClassWebApp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
