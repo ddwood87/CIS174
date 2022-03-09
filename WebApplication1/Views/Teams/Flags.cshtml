@@ -1,0 +1,59 @@
+﻿@model OlympicGames.Models.TeamListViewModel;
+@using OlympicGames.Models;
+@{
+    ViewData["Title"] = "OlympicTeams";
+}
+<h1>Team Flags</h1>
+<div class="menu d-flex flex-column justify-content-start">
+    <div class="d-flex flex-row m-5">
+        <h4>Olympic Games</h4>
+        <form controller="Teams" method="get">
+            <div class="d-flex flex-row flex-wrap">
+
+                @foreach (Country country in Model.Countries)
+                {
+                    //Model.Teams items do not have a Country object unless iterate through Model.Countries
+                }
+                @foreach (OlympicGames.Models.OlympicGame game in Model.Games)
+                {
+                    <input type="submit" asp-action="Index"
+                           asp-route-activeGame="@game.OlympicGameID"
+                           asp-route-activeSport="@Model.ActiveSport"
+                           class="btn btn-info m-2 @Model.CheckActiveGames(game.OlympicGameID)" 
+                           value="@game.Name" />
+                }
+                <a asp-action="Index" asp-route-activeGame="all" asp-route-activeSport="all">Clear Filter</a>
+
+            </div>
+        </form>
+    </div>
+    <div class="list-group d-flex flex-row">
+        <h4>Olympic Sport</h4>
+        <form controller="Teams" method="get" class="d-flex flex-column">
+            <div class="d-flex flex-row flex-wrap">
+
+                @foreach (Sport sport in Model.Sports)
+                {
+                    <input type="submit" asp-action="Index"
+                           asp-route-activeGame="@Model.ActiveGame"
+                           asp-route-activeSport="@sport.SportID"
+                           class="btn btn-info m-1 @Model.CheckActiveSports(sport.SportID)"
+                           value="@sport.Name" />
+                }
+            </div>
+        </form>
+    </div>
+
+</div>
+<div class="flags-container d-flex flex-wrap align-content-between justify-content-between bg-light p-1">
+    @foreach (Team team in Model.Teams)
+    {
+        string toolTipText = team.Country.Name + "\n" + team.Sport.Name + "\n" + team.Games.Name;
+        <span class="d-flex col-lg-4 p-1 justify-content-center"
+              style="height: 160px; width: 400px;">
+            <a asp-action="Details" asp-route-id="@team.TeamID" data-toggle="tooltip" data-placement="bottom" title="@toolTipText">
+                <img style="margin: 3px; height: 120px; width: auto;" src="https://cdn.countryflags.com/thumbs/@team.Country.NameSlug/flag-400.png" />
+            </a>
+        </span>
+    }
+</div>

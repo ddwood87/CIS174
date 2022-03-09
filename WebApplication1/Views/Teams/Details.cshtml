@@ -1,0 +1,25 @@
+﻿@model OlympicGames.Models.TeamViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Team Details</h1>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>
+<div class="d-flex flex-row bg-light">
+    <img style="margin: 3px; height: 120px;" src="https://cdn.countryflags.com/thumbs/@Model.Team.Country.NameSlug/flag-400.png" />
+    <div>
+        <form class="d-flex flex-column" asp-controller="Favorites" asp-action="AddFavorite" method="post">
+            <input type="hidden" asp-for="Team.TeamID" />
+            <span>@Model.Team.Country.Name</span>
+            <span>@Model.Team.Games.Name</span>
+            <span>@Model.Team.Sport.Name</span>
+            <button type="submit" class="btn btn-success">
+                Add to Favorites
+            </button>
+        </form>
+    </div>
+</div>

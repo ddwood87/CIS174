@@ -1,0 +1,33 @@
+﻿@model IEnumerable<OlympicGames.Models.Team>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>Sport</th>
+                <th>Games</th>
+                <th>Indoor?</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td><span>@item.Country.Name</span></td>
+                    <td><span>@item.Sport.Name</span></td>
+                    <td><span>@item.Games.Name</span></td>
+                    <td><span>@if (item.Sport.Indoor){
+                        @("Yes");
+                    }
+                    else { @("No"); }
+                        </span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
