@@ -1,0 +1,38 @@
+﻿@using OlympicGames.Models;
+@model TeamListViewModel;
+
+@{
+    ViewData["Title"] = "Favorite Teams";
+}
+
+<h1>Favorite Teams</h1>
+<a class="btn btn-primary" asp-controller="Home" asp-action="Index">Back to Team List</a>
+<a class="btn btn-danger" asp-controller="Favorites" asp-action="DeleteFavorite">Clear Favorites</a>
+<div class="flags-container d-flex flex-wrap align-content-between justify-content-between bg-light p-1">
+    @foreach (var item in Model.Teams)
+    {
+    <div class="d-flex flex-column col-lg-4 p-1 justify-content-center">
+        <div class="d-flex justify-content-center">
+            <img style="margin: 3px; height: 120px; width: auto;"
+                 src="https://cdn.countryflags.com/thumbs/@item.Country.NameSlug/flag-400.png" />
+        </div>
+            <div class="d-flex flex-column">
+                <div class="d-flex flex-column">
+                    <input type="hidden" value="@item.TeamID" />
+                    <div class="d-flex justify-content-center w-100"><span>@item.Country.Name</span></div>
+                    <div class="d-flex justify-content-center w-100"><span>@item.Games.Name</span></div>
+                    <div class="d-flex justify-content-center w-100"><span>@item.Sport.Name</span></div>
+                        </div>
+
+                <div class="d-flex justify-content-center">
+                    <a class="btn btn-danger d-block"
+                       asp-controller="Favorites"
+                       asp-action="RemoveFavorite"
+                       asp-route-teamID="@item.TeamID">
+                        Remove from Favorites
+                    </a>
+                </div>
+            </div>
+    </div>
+    }
+</div>
