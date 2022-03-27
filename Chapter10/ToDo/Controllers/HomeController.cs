@@ -79,29 +79,34 @@ namespace ToDoApp.Controllers
             return View();
         }
 
+
         // POST: HomeController/Add
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Add(Ticket task)
         {
-            task.Sprint = context.Sprints.First(s => s.SprintId == task.SprintId);
-            task.Status = context.Statuses.First(s => s.StatusId == task.StatusId);
-            if(task.SprintId == -1)
+            if (ModelState.IsValid) 
             {
-                task.Sprint.DueDate = DateTime.Today.AddDays(7);
-            }
-            if (ModelState.IsValid)
-            {
-                context.Tickets.Add(task);
-                context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                ViewBag.Categories = context.Sprints.ToList();
-                ViewBag.Statuses = context.Statuses.ToList();
-                return View(task);
-            }
+                task.Sprint = context.Sprints.First(s => s.SprintId == task.SprintId);
+                task.Status = context.Statuses.First(s => s.StatusId == task.StatusId);
+                if(task.SprintId == -1)
+                {
+                    task.Sprint.DueDate = DateTime.Today.AddDays(7);
+                }
+                
+           
+                    context.Tickets.Add(task);
+                    context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "There are errors in the form.");
+                    ViewBag.Sprints = context.Sprints.ToList();
+                    ViewBag.Statuses = context.Statuses.ToList();
+                    ViewBag.Points = Ticket.PossPoints;
+                    return View(task);
+                }
         }
 
         [HttpPost]

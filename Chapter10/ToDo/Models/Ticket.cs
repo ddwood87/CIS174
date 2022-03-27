@@ -14,7 +14,7 @@ namespace ToDoApp.Models
         private string _name;
         public string Name { 
             get { 
-                if (SprintId == -1){ return _name; }
+                if (SprintId < 0){ return _name; }
                 else{ return "Sprint " + SprintId; }
             } 
             set { _name = value; }
@@ -38,10 +38,12 @@ namespace ToDoApp.Models
         public string Name { get; set; }
         [Required(ErrorMessage = "Please enter a description.")]
         public string Description { get; set; }
-        [Required(ErrorMessage = "Please enter a point value.")]
-        public int Points { get; set; }
-        [Required(ErrorMessage = "Choose a sprint or 'No Sprint'")]
-        public int SprintId { get; set; }
+        [ValidatePoints]
+        //[Required(ErrorMessage = "Please enter a point value.")]        
+        public int? Points { get; set; }
+        [ValidateSprintId]
+        //[Required(ErrorMessage = "Required")]
+        public int? SprintId { get; set; }
         [ForeignKey("SprintId")]
         public Sprint Sprint { get; set; }
         [Required(ErrorMessage = "Please enter a status.")]
