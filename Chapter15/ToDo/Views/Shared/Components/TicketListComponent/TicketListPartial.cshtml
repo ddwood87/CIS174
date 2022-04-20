@@ -1,0 +1,61 @@
+﻿@using ToDoApp.Models
+@model IEnumerable<Ticket>
+@{
+    string Overdue(Ticket task) => task.Overdue ? "bg-warning" : "";
+}
+<div class="ticket-list">
+
+    <table class="table table-bordered table-striped mt-2">
+        <thead>
+            <tr>
+                <th class="col-sm-2">Name</th>
+                <th class="col-sm-4">Description</th>
+                <th class="col-sm-1">Point Value</th>
+                <th class="col-sm-2">Sprint (Due Date)</th>
+                <th class="col-sm-2">Status</th>
+                <th class="col-sm-1"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Ticket task in Model)
+            {
+            <tr>
+                @{string overdue = Overdue(task); }
+                <td>@task.Name</td>
+                <td>@task.Description</td>
+                <td>@task.Points</td>                
+                <td class="@overdue">
+                    @task.Sprint.Name
+                    (@(((DateTime)task.Sprint.DueDate).ToShortDateString()))
+                </td>
+
+                <td class="@overdue">
+                    <!--(A)task.Status.Name-->
+                    <form asp-action="EditStatus" method="post"
+                          asp-route-id="@ViewBag.Filters.FilterString"
+                          class="mr-2">
+                        <input type="hidden" name="@nameof(Ticket.Id)" value="@task.Id" />
+                        <div class="flex-row">
+                            <label class="flex-column" asp-for="@task.StatusId">@task.Status.Name</label>
+                            <select class="flex-column form-control-sm" type="submit"
+                                    name="@nameof(Ticket.StatusId)"
+                                    asp-items="@(new SelectList(ViewBag.Statuses, "StatusId", "Name"))">
+                                <option selected>---Change Status---</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-sm">Change Status</button>
+                    </form>
+                </td>
+                <td>
+                    <a type="submit" class="btn btn-primary btn-sm"
+                       asp-action="Delete" asp-route-id="@task.Id" asp-route-filter="@ViewBag.Filters.FilterString">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+        
+    </table>
+    
+</div>

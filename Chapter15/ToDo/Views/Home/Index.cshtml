@@ -1,0 +1,61 @@
+﻿@using ToDoApp.Models
+@model IEnumerable<Ticket>
+
+<div class="row">
+    <div class="col-sm-2">
+        <form asp-action="Filter" method="post">
+            <div class="form-group">
+                <label>Sprint:</label>
+                <select name="filter" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.Sprints,
+    "SprintId", "Name", ViewBag.Filters.SprintId))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Points:</label>
+                <div>
+                    <div class="form-group">
+                        <label>Min</label>
+                        <select name="filter" class="form-control-sm"
+                                asp-items="@(new SelectList(ViewBag.Points, ViewBag.Filters.MinPoints))">
+                            <option value="all">Any</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Max</label>
+                        <select name="filter" class="form-control-sm"
+                                asp-items="@(new SelectList(ViewBag.Points, ViewBag.Filters.MaxPoints))">
+                            <option value="all">Any</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Due:</label>
+                <select name="filter" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.DueFilters,
+                        "Key", "Value", ViewBag.Filters.Due))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Status:</label>
+                <select name="filter" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.Statuses,
+                        "StatusId", "Name", ViewBag.Filters.StatusId))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <button type="submit" class="">Filter</button>
+            <a asp-action="Index" asp-rout-id=""
+               class="btn btn-primary">Clear</a>
+        </form>
+    </div>
+    <div class="col-sm-10">
+        <a asp-action="Add"><b>Add new task</b></a>
+        <script>console.log("vc @Model")</script>
+        <vc:ticket-list-component model="@Model">
+        </vc:ticket-list-component>
+    </div>
+</div>
